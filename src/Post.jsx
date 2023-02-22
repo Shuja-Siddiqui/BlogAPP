@@ -1,24 +1,32 @@
-export default function Post() {
-    return(
-        <div className="post">
-        <div className="image">
-          <img
-            src="https://images.unsplash.com/photo-1676958906645-fc187a6c6481?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw4fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=400&q=60"
-            alt=""
-          />
-        </div>
-        <div className="text">
-          <h2>Ful House for rent</h2>
-          <p className="info">
-            <a className="author">Jhon XYZ</a>
-            <time>2023-01-06 16:45</time>
-          </p>
-          <p className="summary">
-            Node.js provides a runtime environment to execute JavaScript code
-            from outside a browser. NPM, the Node package manager is used for
-            managing and sharing the packages for either React or Angular.
-          </p>
-        </div>
+import { formatISO9075 } from "date-fns";
+import { Link } from "react-router-dom";
+
+export default function Post({
+  _id,
+  title,
+  summary,
+  cover,
+  content,
+  createdAt,
+  author,
+}) {
+  return (
+    <div className="post">
+      <div className="image">
+        <Link to={`/post/${_id}`}>
+          <img src={"http://localhost:4000/" + cover} alt="" />
+        </Link>
       </div>
-    );
+      <div className="text">
+        <Link to={`/post/${_id}`}>
+          <h2>{title}</h2>
+        </Link>
+        <p className="info">
+          <a className="author">{author.username}</a>
+          <time>{formatISO9075(new Date(createdAt))}</time>
+        </p>
+        <p className="summary">{summary}</p>
+      </div>
+    </div>
+  );
 }
